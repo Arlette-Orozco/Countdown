@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador Rose Gold</title>
+    <!-- Importamos fuentes elegantes desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Fondo transparente para acoplarse a Canva */
+            background-color: transparent; 
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* ESTILO PARA LA FRASE DE ARRIBA */
+        .title {
+            font-family: 'Cormorant Garamond', serif; /* Fuente con estilo cursivo/editorial */
+            font-size: 22px;
+            font-style: italic;
+            color: #B76E79; /* Tono Rose Gold */
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .number {
+            /* TAMAÑO DE LOS NÚMEROS */
+            font-size: 32px; 
+            font-weight: 600;
+            /* COLOR DORADO ROSADO (ROSE GOLD) */
+            color: #B76E79; 
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .label {
+            /* TAMAÑO DE LAS ETIQUETAS */
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            /* COLOR DE LAS LETRAS PEQUEÑAS */
+            color: #9c5c66; 
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- Puedes cambiar el texto de esta frase por el que más te guste -->
+        <div class="title">Faltan muy pocos días:</div>
+
+        <div class="countdown-container">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Días</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Horas</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Minutos</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Segundos</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURADO: 7 de Noviembre de 2026 a las 22:00 hrs (10:00 PM)
+        const eventDate = new Date(2026, 10, 7, 22, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
